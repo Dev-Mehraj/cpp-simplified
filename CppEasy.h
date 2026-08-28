@@ -1,7 +1,7 @@
 //
 // Created by Dev-Mehraj on 8/12/2026.
 // @Copyright Dev-Mehraj CPPEASY_H 2026-2027
-// This OPENSOURCE library is for those  developers who have habit of
+// This OPENSOURCE library is for those  developers `ho have habit of
 // OG english code writing syntax and are having problems with famlilirazing with Cpp syntax!
 // AIM IS TO MAKE CPP SYNTAX AS CLOSE TO READABLE AS POSSIBLE
 // ALSO WITHOUT USING TEMPLATES!!! AVIOD TEMPLATES AND HIGH LEVEL ADVANCED PROGRAMMING!
@@ -10,7 +10,7 @@
 
 #ifndef CPPEASY_CPPEASY_H
 #define CPPEASY_CPPEASY_H
-#define GLEW_STATIC
+
 #include <iostream>
 #include <string>
 
@@ -25,6 +25,7 @@ using namespace std;
 #define finish return 0;
 
 #define structure struct
+#define newL endl
 #define OR ||
 #define AND &&
 #define NOT !
@@ -41,13 +42,15 @@ using namespace std;
 #define MAGENTA "\033[35m"
 #define CYAN    "\033[36m"
 #define RESET   "\033[0m"
-namespace jsk {
+namespace gpp {
 
+
+   
     class Console {
     public:
 
         auto log(auto... args) {
-            ((cout<<args <<" "), ...);
+            ((cout<<args <<" " <<endl), ...);
         }
         auto nlog(auto... args) {
             ((cout <<endl <<args <<" "), ...);
@@ -58,10 +61,13 @@ namespace jsk {
             return input;
         }
         auto error(auto... args) {
-            ((cerr <<args <<" "), ...);
+            ((cerr <<RED <<args <<" " <<endl <<RESET), ...);
         }
         auto warn(auto... args) {
             ((cout  <<YELLOW <<"WARNING: " <<args <<" " <<endl <<RESET), ...);
+        }
+         auto success(auto... args) {
+            ((cout  <<GREEN<<"Success:  " <<args <<" " <<endl <<RESET), ...);
         }
         auto log_table(auto& rowArray, auto& columnArray, string rowLabel = "ROW", string columnLabel = "COLUMN") {
             int rows = rowArray.size();
@@ -294,157 +300,8 @@ class List {
         }
     };
      inline STRING strings;
-    class Window {
-    public:
-        GLFWwindow* handle;
-
-        Window(int width, int height, string title) {
-            glfwInit();
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-            handle = glfwCreateWindow(width, height, title.c_str(), null, null);
-            glfwMakeContextCurrent(handle);
-
-            glfwSwapInterval(1); // Enforces VSync (prevents 100% CPU/GPU usage)
-
-            glewExperimental = true;
-            glewInit();
-        }
-
-        bool isOpen() {
-            return !glfwWindowShouldClose(handle);
-        }
-
-        void clear(float r = 0.1f, float g = 0.1f, float b = 0.1f) {
-            glClearColor(r, g, b, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
-        }
-
-        void update() {
-            glfwSwapBuffers(handle);
-            glfwPollEvents();
-        }
-
-        void close() {
-            glfwDestroyWindow(handle);
-            glfwTerminate();
-        }
-    };class Camera {
-    public:
-        glm::vec3 position;
-        glm::vec3 front;
-        glm::vec3 up;
-        glm::vec3 right;
-        glm::vec3 worldUp;
-
-        float yaw;
-        float pitch;
-        float moveSpeed;
-        float mouseSensitivity;
-
-        bool firstMouse;
-        float lastX, lastY;
-
-        Camera(float posX = 0.0f, float posY = 2.0f, float posZ = 8.0f) {
-            position = glm::vec3(posX, posY, posZ);
-            worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-            front = glm::vec3(0.0f, 0.0f, -1.0f);
-
-            yaw = -90.0f;
-            pitch = 0.0f;
-            moveSpeed = 6.0f;
-            mouseSensitivity = 0.1f;
-
-            firstMouse = true;
-            lastX = 400.0f;
-            lastY = 300.0f;
-
-            updateCameraVectors();
-        }
-
-        void moveTo(float x, float y, float z) {
-            position = glm::vec3(x, y, z);
-        }
-
-        void lookAt(float x, float y, float z) {
-            front = glm::normalize(glm::vec3(x, y, z) - position);
-            pitch = glm::degrees(asin(front.y));
-            yaw = glm::degrees(atan2(front.z, front.x));
-            updateCameraVectors();
-        }
-
-        void setSpeed(float speed) {
-            moveSpeed = speed;
-        }
-
-        void setSensitivity(float sensitivity) {
-            mouseSensitivity = sensitivity;
-        }
-
-        // Handles WASD, Space (Up), and Left-Shift (Down) movement
-        void processKeyboard(GLFWwindow* window, float deltaTime) {
-            float velocity = moveSpeed * deltaTime;
-
-            if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-                position += front * velocity;
-            if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-                position -= front * velocity;
-            if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-                position -= right * velocity;
-            if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-                position += right * velocity;
-            if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-                position += worldUp * velocity;
-            if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-                position -= worldUp * velocity;
-        }
-
-        // Rotates camera based on mouse movement coordinates
-        void processMouse(float xpos, float ypos, bool constrainPitch = true) {
-            if (firstMouse) {
-                lastX = xpos;
-                lastY = ypos;
-                firstMouse = false;
-            }
-
-            float xoffset = (xpos - lastX) * mouseSensitivity;
-            float yoffset = (lastY - ypos) * mouseSensitivity;
-
-            lastX = xpos;
-            lastY = ypos;
-
-            yaw += xoffset;
-            pitch += yoffset;
-
-            if (constrainPitch) {
-                if (pitch > 89.0f) pitch = 89.0f;
-                if (pitch < -89.0f) pitch = -89.0f;
-            }
-
-            updateCameraVectors();
-        }
-
-        glm::mat4 viewMatrix() {
-            return glm::lookAt(position, position + front, up);
-        }
-
-    private:
-        void updateCameraVectors() {
-            glm::vec3 newFront;
-            newFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-            newFront.y = sin(glm::radians(pitch));
-            newFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-            front = glm::normalize(newFront);
-
-            right = glm::normalize(glm::cross(front, worldUp));
-            up = glm::normalize(glm::cross(right, front));
-        }
-    };
-
-
-
+    
+}
 
 
 #endif //CPPEASY_CPPEASY_H
