@@ -1,4 +1,4 @@
-# CppEasy
+# Cpp-Simplified
 
 A single-header C++20 library that makes C++ syntax easier to **read and remember**, without using templates or advanced/high-level programming tricks.
 
@@ -23,17 +23,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Installation
 
-Just drop `CppEasy.h` into your project and include it:
+Just drop `Cpp-Simplified.h` into your project and include it:
 
 ```cpp
-#include "CppEasy.h"
+#include "Cpp-Simplified.h"
 using namespace jsk;
 ```
 
 ## Usage
 
 ```cpp
-#include "CppEasy.h"
+#include "Cpp-Simplified.h"
 using namespace jsk;
 
 int main() {
@@ -54,7 +54,7 @@ int main() {
 
 ### Readable keywords
 
-| CppEasy       | Standard C++ |
+| Cpp-Simplified       | Standard C++ |
 |---------------|--------------|
 | `let`         | `auto`       |
 | `function`    | `auto` (as return type) |
@@ -63,7 +63,7 @@ int main() {
 
 ### Readable logic & operators
 
-| CppEasy         | Standard C++ |
+| Cpp-Simplified         | Standard C++ |
 |-----------------|--------------|
 | `OR`            | `\|\|`        |
 | `AND`           | `&&`         |
@@ -120,7 +120,7 @@ Available for: `INT`, `STRING`, `CHAR`, `DOUBLE`, `SIZE_T`, `SHORT`, `LONG`, `LO
 
 ## ⚠️ Reserved names
 
-Because many features are implemented as preprocessor macros, the following identifiers are reserved once you include `CppEasy.h` — avoid using them as your own variable, function, or type names:
+Because many features are implemented as preprocessor macros, the following identifiers are reserved once you include `Cpp-Simplified.h` — avoid using them as your own variable, function, or type names:
 
 ```
 let, function, null, structure,
@@ -133,7 +133,7 @@ Using any of these as your own identifier will silently expand as a macro instea
 ## Design notes
 
 - **No templates.** Repetition (e.g. `arrayCopierfor*` variants) is a deliberate tradeoff in favor of simplicity over abstraction.
-- **`using namespace std;` is used inside the header.** If you're integrating this into a larger codebase, be aware this will bring the whole `std` namespace into any file that includes `CppEasy.h`.
+- **`using namespace std;` is used inside the header.** If you're integrating this into a larger codebase, be aware this will bring the whole `std` namespace into any file that includes `Cpp-Simplified.h`.
 - Everything library-specific lives under the `jsk` namespace (`jsk::console`, `jsk::arrayReworked`) — `using namespace jsk;` brings it into scope.
 
 ## License
