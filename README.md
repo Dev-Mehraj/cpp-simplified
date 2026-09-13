@@ -27,14 +27,14 @@ Just drop `Cpp-Simplified.h` into your project and include it:
 
 ```cpp
 #include "Cpp-Simplified.h"
-using namespace jsk;
+using namespace gpp;
 ```
 
 ## Usage
 
 ```cpp
 #include "Cpp-Simplified.h"
-using namespace jsk;
+using namespace gpp;
 
 int main() {
     let i = 19;
@@ -134,7 +134,7 @@ Using any of these as your own identifier will silently expand as a macro instea
 
 - **No templates.** Repetition (e.g. `arrayCopierfor*` variants) is a deliberate tradeoff in favor of simplicity over abstraction.
 - **`using namespace std;` is used inside the header.** If you're integrating this into a larger codebase, be aware this will bring the whole `std` namespace into any file that includes `Cpp-Simplified.h`.
-- Everything library-specific lives under the `jsk` namespace (`jsk::console`, `jsk::arrayReworked`) — `using namespace jsk;` brings it into scope.
+- Everything library-specific lives under the `gpp` namespace (`gpp::console`, `gpp::arrayReworked`) — `using namespace gpp;` brings it into scope.
 
 ## License
 
