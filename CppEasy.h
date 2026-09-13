@@ -1,6 +1,6 @@
 //
 // Created by Dev-Mehraj on 8/12/2026.
-// @Copyright Dev-Mehraj CPPEASY_H 2026-2027
+// @Copyright Dev-Mehraj CPP-SIMPLIFIED_H 2026-2027
 // This OPENSOURCE library is for those  developers `ho have habit of
 // OG english code writing syntax and are having problems with famlilirazing with Cpp syntax!
 // AIM IS TO MAKE CPP SYNTAX AS CLOSE TO READABLE AS POSSIBLE
@@ -8,8 +8,8 @@
 // IMPORTANT: Use class after declaring every class so in the main.cpp or any other cpp file, the user doesnt have to declare the class again
 //
 
-#ifndef CPPEASY_CPPEASY_H
-#define CPPEASY_CPPEASY_H
+#ifndef CPP-SIMPLIFIED_CPP-SIMPLIFIED_H
+#define CPP-SIMPLIFIED_CPP-SIMPLIFIED_H
 
 #include <iostream>
 #include <string>
@@ -304,4 +304,4 @@ class List {
 }
 
 
-#endif //CPPEASY_CPPEASY_H
+#endif //CPP-SIMPLIFIED_H
