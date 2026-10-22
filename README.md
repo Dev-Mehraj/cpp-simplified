@@ -23,17 +23,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Installation
 
-Just drop `Cpp-Simplified.h` into your project and include it:
+Just drop `Cpp-Simplified.hpp` into your project and include it:
 
 ```cpp
-#include "Cpp-Simplified.h"
+#include "Cpp-Simplified.hpp"
 using namespace gpp;
 ```
 
 ## Usage
 
 ```cpp
-#include "Cpp-Simplified.h"
+#include "Cpp-Simplified.hpp"
 using namespace gpp;
 
 int main() {
@@ -288,7 +288,7 @@ chars.print(); // [l, e, v, e, l]
 
 ## Reserved names
 
-Because many features are implemented as preprocessor macros, the following identifiers are reserved once you include `Cpp-Simplified.h` — avoid using them as your own variable, function, or type names:
+Because many features are implemented as preprocessor macros, the following identifiers are reserved once you include `Cpp-Simplified.hpp` — avoid using them as your own variable, function, or type names:
 
 ```
 let, function, null, structure, finish, newL,
@@ -302,7 +302,7 @@ Using any of these as your own identifier will silently expand as a macro instea
 ## Design notes
 
 - **No templates at the macro/keyword layer.** Repetition (e.g. `arrayCopierfor*` variants) is a deliberate tradeoff in favor of simplicity over abstraction. `List<T>` is the one templated class in the library, provided as a more ergonomic alternative to the untemplated `arrayReworked` copiers.
-- **`using namespace std;` is used inside the header.** If you're integrating this into a larger codebase, be aware this will bring the whole `std` namespace into any file that includes `Cpp-Simplified.h`.
+- **`using namespace std;` is used inside the header.** If you're integrating this into a larger codebase, be aware this will bring the whole `std` namespace into any file that includes `Cpp-Simplified.hpp`.
 - Everything library-specific lives under the `gpp` namespace (`gpp::console`, `gpp::arrayReworked`, `gpp::strings`, `gpp::List`, `gpp::FileReader`, `gpp::FileWriter`) — `using namespace gpp;` brings it into scope.
 
 ## License
